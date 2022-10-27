@@ -7,22 +7,13 @@
 </head>
 <body>
     <h1>Ház szimulátor</h1>
-    <canvas id="canvas" width='3000' height='900' style="border: 1px solid;"></canvas>
+    <canvas id="canvas" width='1250' height='900' style="border: 1px solid;"></canvas><br>
+    <button onclick="gyorsit()">Gyorsít</button>
+    <br>
+    <br>
+    <button onclick="lassit()">Lassít</button>
     <script>
-        let c = document.getElementById("canvas")
-        let ctx = c.getContext("2d")
-        ctx.fillStyle = "black";
-        ctx.beginPath();
-        ctx.arc(600,500,10,0,2*Math.PI)
-        ctx.moveTo(200,50);
-        ctx.lineTo(900,50);
-        ctx.lineTo(900,600);
-        ctx.moveTo(900,600)
-        ctx.lineTo(450,600);
-        ctx.moveTo(400,600)
-        ctx.lineTo(200,600)
-        ctx.lineTo(200,50)
-        ctx.stroke();
+      
 
        (function() {
   var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
@@ -37,16 +28,16 @@ window.addEventListener("keyup", onKeyUp, false);
 function onKeyDown(event) {
   var key = event.key;
   switch (key) {
-    case "d": //d
+    case "d":
       keyD = true;
       break;
-    case "s": //s
+    case "s":
       keyS = true;
       break;
-    case "a": //a
+    case "a":
       keyA = true;
       break;
-    case "w": //w
+    case "w":
       keyW = true;
       break;
   }
@@ -56,24 +47,24 @@ function onKeyUp(event) {
   var key = event.key;
 
   switch (key) {
-    case "d": //d
-      keyD = false;
+    case "d": 
+    keyD = false;
       break;
-    case "s": //s
+    case "s":
       keyS = false;
       break;
-    case "a": //a
+    case "a":
       keyA = false;
       break;
-    case "w": //w
+    case "w":
       keyW = false;
       break;
   }
 }
 
 //neccessary variables
-var tickX = 10;
-var tickY = 10;
+var tickX = 800;
+var tickY = 700;
 
 var keyW = false;
 var keyA = false;
@@ -85,29 +76,72 @@ function drawStuff() {
   window.requestAnimationFrame(drawStuff);
   var canvas = document.getElementById("canvas");
   var c = canvas.getContext("2d");
+  c.clearRect(0,0,1250,900);
+  c.beginPath();
+  c.arc(tickX,tickY,10,0,3*Math.PI);
+  c.moveTo(200,50);
+  c.lineTo(900,50);
+  c.lineTo(900,600);
+  c.moveTo(900,600)
+  c.lineTo(450,600);
+  c.moveTo(400,600)
+  c.lineTo(200,600)
+  c.lineTo(200,50)
+  c.stroke();
 
-  c.clearRect(0, 0, 800, 800);
-  c.fillStyle = "blue";
-  c.fillRect(tickX, tickY, 100, 100);
+
+
 
   if (keyD == true) {
+    tickX += 5;
+  }
+  if (keyS == true) {
+    tickY += 5;
+  }
+  if (keyA == true) {
+    tickX-= 5;
+  }
+  if (keyW == true) {
+    tickY-= 5;
+    }
+    
+  }window.requestAnimationFrame(drawStuff);
+
+
+
+function gyorsit(){
+  window.requestAnimationFrame(gyorsit);
+  var canvas = document.getElementById("canvas");
+  var c = canvas.getContext("2d");
+  c.clearRect(0,0,1250,900);
+  c.beginPath();
+  c.arc(tickX,tickY,10,0,3*Math.PI);
+  c.moveTo(200,50);
+  c.lineTo(900,50);
+  c.lineTo(900,600);
+  c.moveTo(900,600)
+  c.lineTo(450,600);
+  c.moveTo(400,600)
+  c.lineTo(200,600)
+  c.lineTo(200,50)
+  c.stroke();
+
+    if (keyD == true) {
     tickX += 1;
   }
   if (keyS == true) {
     tickY += 1;
   }
   if (keyA == true) {
-    tickX--;
+    tickX-= 1;
   }
   if (keyW == true) {
-    tickY--;
+    tickY-= 1;
+    }
+    
   }
-}
-window.requestAnimationFrame(drawStuff);
-
-
-
-
+  window.requestAnimationFrame(gyorsit);
+  
     </script>
     
 </body>
