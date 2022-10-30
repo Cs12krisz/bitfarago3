@@ -11,7 +11,11 @@
     <button onclick="gyorsit()">Gyorsít</button>
     <br>
     <br>
+    <button onclick="normal()">Normál</button>
+    <br>
+    <br>
     <button onclick="lassit()">Lassít</button>
+
     <script>
       
 
@@ -65,15 +69,19 @@ function onKeyUp(event) {
 //neccessary variables
 var tickX = 800;
 var tickY = 700;
+var r = 50
+var u = 400
+var v = 300
 
 var keyW = false;
 var keyA = false;
 var keyS = false;
 var keyD = false;
+let talalt = false;
 
 //main animation function
 function drawStuff() {
-  window.requestAnimationFrame(drawStuff);
+  window.requestAnimationFrame(drawStuff)
   var canvas = document.getElementById("canvas");
   var c = canvas.getContext("2d");
   c.clearRect(0,0,1250,900);
@@ -88,10 +96,20 @@ function drawStuff() {
   c.lineTo(200,600)
   c.lineTo(200,50)
   c.stroke();
+  }window.requestAnimationFrame(drawStuff)
 
+ 
+  function szenzor(){
+  window.requestAnimationFrame(szenzor)
+  var canvas = document.getElementById("canvas");
+  var c = canvas.getContext("2d");
+  c.beginPath()
+  c.arc(u,v,r,0,2*Math.PI);
+  c.stroke()
+  } window.requestAnimationFrame(szenzor);
 
-
-
+  function normal(){
+    window.requestAnimationFrame(normal)
   if (keyD == true) {
     tickX += 5;
   }
@@ -99,48 +117,55 @@ function drawStuff() {
     tickY += 5;
   }
   if (keyA == true) {
-    tickX-= 5;
+    tickX -= 5;
   }
   if (keyW == true) {
-    tickY-= 5;
+    tickY -= 5;
     }
-    
-  }window.requestAnimationFrame(drawStuff);
-
-
+    if ((r * r) > ((tickX - u)*(tickX-u)+(tickY-v) * (tickY - v))){
+    console.log("Érzékelve")
+  }else{
+    return;
+}
+  } 
 
 function gyorsit(){
-  window.requestAnimationFrame(gyorsit);
-  var canvas = document.getElementById("canvas");
-  var c = canvas.getContext("2d");
-  c.clearRect(0,0,1250,900);
-  c.beginPath();
-  c.arc(tickX,tickY,10,0,3*Math.PI);
-  c.moveTo(200,50);
-  c.lineTo(900,50);
-  c.lineTo(900,600);
-  c.moveTo(900,600)
-  c.lineTo(450,600);
-  c.moveTo(400,600)
-  c.lineTo(200,600)
-  c.lineTo(200,50)
-  c.stroke();
-
-    if (keyD == true) {
-    tickX += 1;
+  window.requestAnimationFrame(gyorsit)
+  if (keyD == true) {
+    tickX += 6;
   }
   if (keyS == true) {
-    tickY += 1;
+    tickY += 6;
   }
   if (keyA == true) {
-    tickX-= 1;
+    tickX -= 6;
   }
   if (keyW == true) {
-    tickY-= 1;
+    tickY -= 6;
     }
-    
+    if ((r * r) > ((tickX - u)*(tickX-u)+(tickY-v) * (tickY - v))){
+    console.log("2*Érzékelve")
+  }else{
+    return;
   }
-  window.requestAnimationFrame(gyorsit);
+    
+}
+
+function lassit(){
+  if (keyD == true) {
+    tickX + 3;
+  }
+  if (keyS == true) {
+    tickY + 3;
+  }
+  if (keyA == true) {
+    tickX -3;
+  }
+  if (keyW == true) {
+    tickY -3;
+    }
+}
+
   
     </script>
     
