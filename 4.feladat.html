@@ -152,6 +152,81 @@ function drawStuff() {
       tickY -= 5;
       mozog = true;
   }
+  
+  var x1 = new Array()
+  for(let i = 200; i < 300; i++)
+  {
+    x1[i] = i
+  }
+  
+  var x2 = new Array()
+  for(let i = 325; i < 350; i++)
+  {
+    x2[i] = i
+  }
+
+  var x3 = new Array()
+  for(let i = 375; i < 480; i++)
+  {
+    x3[i] = i
+  }
+
+  var wallX1 = new Array(x1, x2, x3)
+  var wallY1 = 50
+
+  var x4 = 420
+
+  var x5 = new Array()
+  for(let i = 420; i > 350; i--)
+  {
+    x5[i] = i
+  }
+
+  var x6 = new Array()
+  for(let i = 300; i > 200; i--)
+  {
+    x6[i] = i
+  }
+
+  var y2 = 50
+  var y3 = new Array()
+  for(let i = 50; i < 300; i++)
+  {
+    y3[i] = i
+  }
+
+  var wallX2 = new Array(x4, x5, x6)
+  var wallY2 = new Array(y2, y3)
+
+  var wallX = new Array(wallX1, wallX2)
+  var wallY = new Array(wallY1, wallY2)
+
+  var xwall = false
+  var ywall = false
+  
+  for(let i = 0; i <= wallX.length; i++)
+  {
+    if(tickX == wallX[i])
+    {
+      xwall = true
+    }
+  }
+
+  for(let i = 0; i <= wallY.length; i++)
+  {
+    if(tickY == wallY[i])
+    {
+      ywall = true
+    }
+  }
+  
+  if(xwall == true & ywall == true)
+  {
+    if(keyW == true & keyD == false & keyA == false)
+      {
+        tickY = tickY - 5
+      }
+  }
 }
 window.requestAnimationFrame(drawStuff)
 szenzor()
