@@ -8,17 +8,17 @@
 <body>
     <h1>Ház szimulátor</h1>
     <canvas id="canvas" width='1250' height='900' style="border: 1px solid;"></canvas><br>
-    <button onclick="gyorsit()">Gyorsít</button>
+    <button onclick="gyorsit()" id="gyors">Gyorsít</button>
     <br>
     <br>
-    <button onclick="normal()">Normál</button>
+    <button id="normal">Normál</button>
     <br>
     <br>
-    <button onclick="lassit()">Lassít</button>
+    <button onclick="lassit()" id="lassu">Lassít</button>
 
     <script>
       
-
+   
        (function() {
   var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
     window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
@@ -68,16 +68,20 @@ function onKeyUp(event) {
 
 //neccessary variables
 var tickX = 800;
-var tickY = 700;
-var r = 50
-var u = 400
-var v = 300
+var tickY = 500;
+
 
 var keyW = false;
 var keyA = false;
 var keyS = false;
 var keyD = false;
-let talalt = false;
+
+var norm = true;
+var slow = false;
+var fast = false;
+var normerzek = false;
+var gyorserzek = false;
+var mozog = false;
 
 //main animation function
 function drawStuff() {
@@ -88,86 +92,334 @@ function drawStuff() {
   c.beginPath();
   c.arc(tickX,tickY,10,0,3*Math.PI);
   c.moveTo(200,50);
-  c.lineTo(900,50);
+  c.lineTo(300,50);
+  c.moveTo(325,50)
+  c.lineTo(350,50)
+  c.moveTo(375,50)
+  c.lineTo(480,50)
+  // Bal felső szoba
+  c.moveTo(420,50)
+  c.lineTo(420,300)
+  c.lineTo(350,300)
+  c.moveTo(300,300)
+  c.lineTo(200,300);
+  // Eddig
+  c.moveTo(510,50)
+  c.lineTo(535,50)
+  c.moveTo(560,50)
+  c.lineTo(900,50)
   c.lineTo(900,600);
   c.moveTo(900,600)
   c.lineTo(450,600);
   c.moveTo(400,600)
   c.lineTo(200,600)
   c.lineTo(200,50)
-  c.stroke();
-  }window.requestAnimationFrame(drawStuff)
+  // Bal alsó szoba
+  c.moveTo(200,400)
+  c.lineTo(250,400)
+  c.moveTo(300,400)
+  c.lineTo(350,400)
+  c.lineTo(350,600)
+// Eddig
+  c.moveTo(700,600)
+  c.lineTo(700,400)
+  c.lineTo(760,400)
+  c.moveTo(810,400)
+  c.lineTo(900,400)
 
- 
+  c.moveTo(700,300)
+  c.lineTo(700,50)
+  c.moveTo(700,300)
+  c.lineTo(750,300)
+  c.moveTo(800,300)
+  c.lineTo(900,300)
+  c.stroke();
+  if (keyD == true) {
+      tickX+=5
+      mozog = true;
+  }else{
+    mozog = false;
+  }
+  if (keyS == true) {
+      tickY += 5;
+      mozog = true;
+  }
+  if (keyA == true) {
+      tickX -= 5;
+      mozog = true;
+  }
+  if (keyW == true){
+      tickY -= 5;
+      mozog = true;
+  }
+}
+window.requestAnimationFrame(drawStuff)
+szenzor()
+szenzor2()
+szenzor3()
+szenzor4()
+szenzor5()
+
+function szenzor5(){
+  window.requestAnimationFrame(szenzor5)
+  var canvas = document.getElementById("canvas");
+  var c = canvas.getContext("2d");
+  c.beginPath()
+  c.arc(250,400,5,0,2*Math.PI)
+  c.stroke()
+  if(normerzek == true){
+    if((50*50) > ((tickX - 250)*(tickX - 250)+(tickY - 400)*(tickY - 400)) && mozog == true){
+      c.fillStyle = "blue"
+      c.fill()
+    }
+  }else if(gyorserzek == true){
+    if((50*50) > ((tickX - 250)*(tickX - 250)+(tickY - 400)*(tickY - 400)) && mozog == true){
+    normerzek = false;
+    c.fillStyle = "red"
+    c.fill()
+    }
+  }
+}
+
+
+function szenzor4(){
+window.requestAnimationFrame(szenzor4)
+  var canvas = document.getElementById("canvas");
+  var c = canvas.getContext("2d");
+  c.beginPath()
+  c.arc(300,300,5,0,2*Math.PI)
+  c.stroke()
+  if(normerzek == true){
+    if((50*50) > ((tickX - 300)*(tickX - 300)+(tickY - 300)*(tickY - 300)) && mozog == true){
+      c.fillStyle = "blue"
+      c.fill()
+    }
+  }else if(gyorserzek == true){
+    if((50*50) > ((tickX - 300)*(tickX - 300)+(tickY - 300)*(tickY - 300)) && mozog == true){
+    normerzek = false;
+    c.fillStyle = "red"
+    c.fill()
+    }
+  }
+}
+
+function szenzor3(){
+  window.requestAnimationFrame(szenzor3)
+  var canvas = document.getElementById("canvas");
+  var c = canvas.getContext("2d");
+  c.beginPath()
+  c.arc(750,300,5,0,2*Math.PI)
+  c.stroke()
+  if(normerzek == true){
+    if((50*50) > ((tickX - 750)*(tickX - 750)+(tickY - 300)*(tickY - 300)) && mozog == true){
+      c.fillStyle = "blue"
+      c.fill()
+    }
+  }else if(gyorserzek == true){
+    if((50*50) > ((tickX - 750)*(tickX - 750)+(tickY - 300)*(tickY - 300)) && mozog == true){
+    normerzek = false;
+    c.fillStyle = "red"
+    c.fill()
+    }
+  }
+}
+
+
+function szenzor2(){
+  window.requestAnimationFrame(szenzor2)
+  var canvas = document.getElementById("canvas");
+  var c = canvas.getContext("2d");
+  c.beginPath()
+  c.arc(760,400,5,0,2*Math.PI);
+  c.stroke()
+  if(normerzek == true){
+    if((50 * 50) > ((tickX - 760)*(tickX-760)+(tickY-400) * (tickY - 400)) && mozog == true){
+    c.fillStyle = "blue"
+    c.fill()
+  }
+}else if(gyorserzek == true){
+    if((50 * 50) > ((tickX - 760)*(tickX-760)+(tickY-400) * (tickY - 400)) && mozog == true){
+    normerzek = false;
+    c.fillStyle = "red"
+    c.fill()
+    }
+  }
+}
+
+
   function szenzor(){
   window.requestAnimationFrame(szenzor)
   var canvas = document.getElementById("canvas");
   var c = canvas.getContext("2d");
   c.beginPath()
-  c.arc(u,v,r,0,2*Math.PI);
+  c.arc(400,600,5,0,2*Math.PI);
   c.stroke()
-  } window.requestAnimationFrame(szenzor);
+  if(normerzek == true){
+    if((50 * 50) > ((tickX - 400)*(tickX-400)+(tickY-600) * (tickY - 600)) && mozog == true){
+    c.fillStyle = "blue"
+    c.fill()
+  }
+}else if(gyorserzek == true){
+    if((50 * 50) > ((tickX - 400)*(tickX-400)+(tickY-600) * (tickY - 600)) && mozog == true){
+    normerzek = false;
+    c.fillStyle = "red"
+    c.fill()
+    }
+  }
+}window.requestAnimationFrame(szenzor)
 
-  function normal(){
+  function hall(){
+  window.requestAnimationFrame(hall)
+  var canvas = document.getElementById("canvas");
+  var c = canvas.getContext("2d");
+  c.beginPath()
+  c.arc(400,600,50,0,2*Math.PI)
+  if ((50 * 50) > ((tickX - 400)*(tickX-400)+(tickY-600) * (tickY - 600)) && mozog == true){
+    console.log("Érzekelés")
+    normerzek = true
+  }
+}window.requestAnimationFrame(hall)
+
+
+function hall2(){
+  window.requestAnimationFrame(hall2)
+  var canvas = document.getElementById("canvas");
+  var c = canvas.getContext("2d");
+  c.beginPath()
+  c.arc(760,400,50,0,2*Math.PI)
+  if ((50 * 50) > ((tickX - 760)*(tickX-760)+(tickY-400) * (tickY - 400)) && mozog == true){
+    console.log("Érzekelés")
+    normerzek = true
+  }
+}window.requestAnimationFrame(hall2)
+
+function hall3(){
+  window.requestAnimationFrame(hall3)
+  var canvas = document.getElementById("canvas");
+  var c = canvas.getContext("2d");
+  c.beginPath()
+  c.arc(750,300,50,0,2*Math.PI)
+  if ((50 * 50) > ((tickX - 750)*(tickX-750)+(tickY-300) * (tickY - 300)) && mozog == true){
+    console.log("Érzekelés")
+    normerzek = true
+  }
+}window.requestAnimationFrame(hall3)
+
+function hall4(){
+  window.requestAnimationFrame(hall4)
+  var canvas = document.getElementById("canvas");
+  var c = canvas.getContext("2d");
+  c.beginPath()
+  c.arc(300,300,50,0,2*Math.PI)
+  if ((50 * 50) > ((tickX - 300)*(tickX-300)+(tickY-300) * (tickY - 300)) && mozog == true){
+    console.log("Érzekelés")
+    normerzek = true
+  }
+}window.requestAnimationFrame(hall4)
+
+
+function hall5(){
+  window.requestAnimationFrame(hall5)
+  var canvas = document.getElementById("canvas");
+  var c = canvas.getContext("2d");
+  c.beginPath()
+  c.arc(250,400,50,0,2*Math.PI)
+  if ((50 * 50) > ((tickX -250)*(tickX-250)+(tickY-400) * (tickY - 400)) && mozog == true){
+    console.log("Érzekelés")
+    normerzek = true
+  }
+}window.requestAnimationFrame(hall5)
+
+ 
+
+ function normal(){
     window.requestAnimationFrame(normal)
-  if (keyD == true) {
-    tickX += 5;
+    if(norm == false){
+      if (keyD == true) {
+    tickX += 0;
   }
   if (keyS == true) {
-    tickY += 5;
+    tickY += 0;
   }
   if (keyA == true) {
-    tickX -= 5;
+    tickX -= 0;
   }
   if (keyW == true) {
-    tickY -= 5;
+    tickY -= 0;
+      }
     }
-    if ((r * r) > ((tickX - u)*(tickX-u)+(tickY-v) * (tickY - v))){
-    console.log("Érzékelve")
-  }else{
-    return;
-}
-  } 
+ }
 
-function gyorsit(){
+
+
+
+ function gyorsit(){
+  var canvas = document.getElementById("canvas");
+  var c = canvas.getContext("2d");
+  norm = false;
+  slow = false;
+  fast = true;
+  gyorserzek = true;
+  normerzek = false;
   window.requestAnimationFrame(gyorsit)
+  if(fast){
   if (keyD == true) {
     tickX += 6;
-  }
+    mozog = true;
+  }else{
+      mozog = false;
+    }
   if (keyS == true) {
     tickY += 6;
+    mozog = true;
   }
   if (keyA == true) {
     tickX -= 6;
+    mozog = true;
   }
-  if (keyW == true) {
+  if (keyW == true){
     tickY -= 6;
+    mozog = true;
     }
-    if ((r * r) > ((tickX - u)*(tickX-u)+(tickY-v) * (tickY - v))){
-    console.log("2*Érzékelve")
-  }else{
-    return;
   }
-    
 }
 
-function lassit(){
+
+ function lassit(){
+  norm = false
+  fast = false;
+  slow = true;
+  window.requestAnimationFrame(lassit)
+  if(slow){
   if (keyD == true) {
-    tickX + 3;
+    tickX += 3
+    mozog = true;
+}else{
+    mozog = false;
   }
   if (keyS == true) {
-    tickY + 3;
+    tickY += 3
+    mozog = true;
+}else{
+    mozog = false;
   }
   if (keyA == true) {
-    tickX -3;
+    tickX -= 3
+    mozog = true;
+}else{
+    mozog = false;
   }
   if (keyW == true) {
-    tickY -3;
-    }
+    tickY -= 3
+    mozog = true;
+    }else{
+    mozog = false;
+  }
+  }
 }
+  
 
   
-    </script>
-    
+  </script>
 </body>
 </html>
