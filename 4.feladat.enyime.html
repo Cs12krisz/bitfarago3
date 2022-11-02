@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ház</title>
+</head>
+<body>
+    <h1>Ház szimulátor</h1>
+    <canvas id="canvas" width='1250' height='900' style="border: 1px solid;"></canvas><br>
+    <button onclick="gyorsit()">Gyorsít</button>
+    <br>
+    <br>
+    <button onclick="normal()">Normál</button>
+    <br>
+    <br>
+    <button onclick="lassit()">Lassít</button>
+
+    <script>
+      
+
+       (function() {
+  var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+    window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+  window.requestAnimationFrame = requestAnimationFrame;
+})();
+
+//event listener
+window.addEventListener("keydown", onKeyDown, false);
+window.addEventListener("keyup", onKeyUp, false);
+
+function onKeyDown(event) {
+  var key = event.key;
+  switch (key) {
+    case "d":
+      keyD = true;
+      break;
+    case "s":
+      keyS = true;
+      break;
+    case "a":
+      keyA = true;
+      break;
+    case "w":
+      keyW = true;
+      break;
+  }
+}
+
+function onKeyUp(event) {
+  var key = event.key;
+
+  switch (key) {
+    case "d": 
+    keyD = false;
+      break;
+    case "s":
+      keyS = false;
+      break;
+    case "a":
+      keyA = false;
+      break;
+    case "w":
+      keyW = false;
+      break;
+  }
+}
+
+//neccessary variables
+var tickX = 800;
+var tickY = 700;
+var r = 70
+var u = 800
+var v = 120
+
+var keyW = false;
+var keyA = false;
+var keyS = false;
+var keyD = false;
+let talalt = false;
+
+//main animation function
+function drawStuff() {
+  window.requestAnimationFrame(drawStuff)
+  var canvas = document.getElementById("canvas");
+  var c = canvas.getContext("2d");
+  c.clearRect(0,0,1250,900);
+  c.beginPath();
+  c.arc(tickX,tickY,10,0,3*Math.PI);
+  c.moveTo(200,50);
+  c.lineTo(900,50);
+  c.lineTo(900,600);
+  c.moveTo(900,600);
+  c.lineTo(450,600);
+  c.moveTo(400,600);
+  c.lineTo(200,600);
+  c.lineTo(200,50);
+  c.moveTo(650,50);
+  c.lineTo(650,220);
+  c.moveTo(650,220);
+  c.lineTo(755,220);
+  c.moveTo(810,220);
+  c.lineTo(900,220);
+  c.stroke();
+  }window.requestAnimationFrame(drawStuff)
+
+ 
+  function szenzor(){
+    window.requestAnimationFrame(szenzor)
+    var canvas = document.getElementById("canvas");
+    var c = canvas.getContext("2d");
+    c.beginPath()
+    c.arc(u,v,r,0,2*Math.PI);
+    c.stroke()
+    } window.requestAnimationFrame(szenzor);
+
+    function normal(){
+      window.requestAnimationFrame(normal)
+    if (keyD == true) {
+      tickX += 5;
+    }
+    if (keyS == true) {
+      tickY += 5;
+    }
+    if (keyA == true) {
+      tickX -= 5;
+    }
+    if (keyW == true) {
+      tickY -= 5;
+      }
+    if ((r * r) > ((tickX - u)*(tickX-u)+(tickY-v) * (tickY - v))){
+      console.log("Érzékelve")
+    }else{
+      return;
+    }
+  } 
+
+function gyorsit(){
+  window.requestAnimationFrame(gyorsit)
+  if (keyD == true) {
+    tickX += 6;
+  }
+  if (keyS == true) {
+    tickY += 6;
+  }
+  if (keyA == true) {
+    tickX -= 6;
+  }
+  if (keyW == true) {
+    tickY -= 6;
+    }
+    if ((r * r) > ((tickX - u)*(tickX-u)+(tickY-v) * (tickY - v))){
+    console.log("2*Érzékelve")
+  }else{
+    return;
+  }
+    
+}
+
+function lassit(){
+  if (keyD == true) {
+    tickX + 3;
+  }
+  if (keyS == true) {
+    tickY + 3;
+  }
+  if (keyA == true) {
+    tickX -3;
+  }
+  if (keyW == true) {
+    tickY -3;
+    }
+}
+
+  
+    </script>
+    
+</body>
+</html>
